@@ -1,0 +1,32 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int c = 1000000;
+vector<bool>v(c);
+void sieve(){
+	v[0]=1;
+	v[1]=1;
+	for(int i = 2; i*i<=c;++i){
+		if(!v[i]){
+			for(int j = i*i;j<c;j+=i)v[j] = true;
+		}
+	}
+}
+int main(){
+	sieve();
+	int N;
+	while(cin>>N){
+		if(N==0)break;
+		cout<<N<<":"<<endl;
+		int centro = N/2;
+		bool flag = false;
+		for(int i = 0; i<=centro;++i){
+			if(!v[i] && !v[N-i]){
+				cout<<i<<"+"<<N-i<<endl;
+				flag = true;
+				break;
+			}
+		}
+		if(!flag)cout<<"NO WAY!"<<endl;
+	}
+}
